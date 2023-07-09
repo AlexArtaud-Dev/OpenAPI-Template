@@ -1,6 +1,5 @@
 const ts = new Date();
 const fs = require('fs');
-const open = require('open');
 const cors = require('cors');
 const https = require('https')
 const express = require("express");
@@ -24,16 +23,15 @@ app.use("/v1/swagger", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use(express.json());
 
 // Allow Access-Control-Allow-Origin from *
-app.use(cors({ origin: '*' }));
-
+app.use(cors());
 
 // Import Routes
 
-const usersRoute = require('./routes/users');
+const authRoute = require('./routes/auth');
 
 // Route Middlewares
 
-app.use('/api/users', usersRoute);
+app.use('/api/auth', authRoute);
 
 // Server Listening
 https.createServer({
@@ -43,5 +41,4 @@ https.createServer({
     .listen(port, function () {
         console.clear();
         console.log(`${ts.toLocaleString()} - App listening on port ${port}! Go to https://localhost:${port}/v1/swagger`)
-        open(`https://localhost:${port}/v1/swagger`, {app: 'firefox'});
     })

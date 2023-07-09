@@ -1,27 +1,39 @@
 const swaggerOptions = {
     swaggerDefinition: {
+        openapi: "3.0.0",
         info: {
-            title: "OPENAPI TEMPLATE API",
+            title: "Finanze API",
             contact : {
-                name: "Undefined"
+                name: "alex3227"
             },
             version: "Alpha 1.0.0",
-            servers: ["https://localhost:5000"]
         },
-        basePath: "/api",
-        paths : {},
-        securityDefinitions: {
-            Bearer: {
-                in: "header",
-                name: "auth-token",
-                description: "This token is needed to use logged in features",
-                required: true,
-                type: "apiKey",
+        servers: [
+            {
+                url: "https://localhost:5000/api",
+            }
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: "http",
+                    scheme: "bearer",
+                    bearerFormat: "JWT",
+                }
             }
         },
         tags: [
             {
-                name: "User"
+                name: "User",
+                description: "Routes for user management"
+            },
+            {
+                name: "Authentication",
+                description: "Routes for authentication"
+                // externalDocs: {
+                //     description: "Find out more",
+                //     url: "https://swagger.io"
+                // }
             }
         ],
     },

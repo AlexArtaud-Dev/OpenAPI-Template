@@ -1,31 +1,23 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
-    creationDate: {
-        type: Date,
-        default: (Date.now())
+const UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
     },
     email: {
         type: String,
         required: true,
-        match: /.+\@.+\..+/,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
         required: true,
-        max: 1024,
-        min: 6
     },
-    username: {
+    refreshToken: {
         type: String,
-        required: true,
-        index: true,
-        unique: true,
-        max: 255,
-        min: 6
-    }
+    },
 });
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = User = mongoose.model('User', UserSchema);
